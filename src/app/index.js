@@ -9,6 +9,8 @@ app.use(KoaBody())
 app.use(userRouter.routes())
 app.use(topicRouter.routes())
 
+const cors = require('cors')
+app.use(cors())
 
 const errHandler = require('./errHandler')
 // 统一的错误处理
