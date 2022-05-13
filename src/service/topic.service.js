@@ -24,5 +24,23 @@ class TopicService {
         })
         return res ? res : null
     }
+    async getTopicListHot(req){
+        // const where = {}
+        const currentPage = parseInt(req.pageNum) || 1;
+        const pageSize = parseInt(req.pageSize) || 10;
+        // 总条数
+        // const result = await Topic.findAndCountAll();
+        // console.log('条数',result.count);
+
+        const res = await Topic.findAll({
+            attributes: ['id', 'title', 'content'],
+            order:[['id','desc']],
+            // where:where,
+            offset:(currentPage-1)*pageSize,
+            limit:pageSize
+        })
+        console.log('4444',res)
+        return res ? res : null
+    }
 }
 module.exports = new TopicService
