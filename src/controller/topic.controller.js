@@ -15,9 +15,8 @@ class TopicController {
         }
     }
     async getTopicByTitle(ctx,next){
-        const { title } = ctx.request.body
-        const res = await getTopicByTitle(title)
-        console.log('3333',res)
+        const param = ctx.request.body
+        const res = await getTopicByTitle(param)
         // 2.从数据库查询对应id的titile
         ctx.body = {
             code: 200,
@@ -29,11 +28,8 @@ class TopicController {
         
     }
     async getTopicListHot(ctx,next){
-        console.log(ctx.request.body)
         const param = ctx.request.body
-
         const res = await getTopicListHot(param)
-        console.log('3333',res)
         // 2.从数据库查询对应id的titile
         ctx.body = {
             code: 200,
