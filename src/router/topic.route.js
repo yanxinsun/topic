@@ -4,7 +4,7 @@ const router = new Router({ prefix: '/topic' })
 
 const { getTopicById, addTopic,getTopicByTitle,getTopicListHot } = require('../controller/topic.controller')
 // 查看题目
-router.post('/topic', getTopicById)
+router.post('/content', getTopicById)
 //通过title查看题目
 router.post('/title', getTopicByTitle)
 // 增加题目

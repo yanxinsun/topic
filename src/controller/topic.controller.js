@@ -2,9 +2,9 @@ const { getTopicById,getTopicByTitle,getTopicListHot} = require('../service/topi
 class TopicController {
     async getTopicById(ctx,next){
         // 1. 获取数据
-        const { topicId } = ctx.request.body
+        const { id } = ctx.request.body
 
-        const res = await getTopicById(topicId)
+        const res = await getTopicById(id)
         // 2.从数据库查询对应id的titile
         ctx.body = {
             code: 200,

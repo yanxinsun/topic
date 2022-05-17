@@ -4,19 +4,7 @@ const xlsx = require('node-xlsx')
 
 class ReadPdfController {
     //读取pdf文件
-    async readFile(ctx, next) {
-        const file = ctx.request.files.file; // 获取上传文件
-        console.log('filepath', file.path)
-        var pdfParser = new PDFParser();
-        const aa = fs.readFile(file.path, function (err, pdfBuffer) {
-            pdfParser.parseBuffer(pdfBuffer);
-        }, function (pdfBuffer) {
-            pdfParser.parseBuffer(pdfBuffer);
-        })
-        console.log('aa', aa)
 
-
-    }
     async readFile2(ctx, next) {
 
         const file = ctx.request.files.file;
@@ -29,14 +17,21 @@ class ReadPdfController {
             const filename = pdfParser.loadPDF(pdfFilePath);
             console.log(filename)
 
+
             pdfParser.on("pdfParser_dataError", errData => console.log(errData.parserError))
             pdfParser.on("pdfParser_dataReady", pdfData => {
                 console.log("step 3")
                 //读取PDF，转换成TXT文本内容
                 let dataTXT = pdfParser.getRawTextContent()
-                console.log('datatxt',dataTXT)
                 //正则：删除空白字符和.符号
-                // let dataTXTs = dataTXT.replace(/(\s|\.)+/g, '')
+                let dataTXTs = dataTXT.replaceAll(/----------------Page \(.*\) Break----------------/gi, '')
+                let dataTXTs2 = dataTXTs.replaceAll(/(^\s*)|(\s*$)/g,'')
+
+                
+                // console.log('datatxt',dataTXTs)
+                fs.writeFile('./test.txt',dataTXTs2,function(err){
+                    if(err)  console.log('写入失败',err)
+                })
                 // //正则：匹配并返回号码、账期、发票金额
                 // let dataTarget = dataTXTs.match(/(?<=(号码.|帐期.|￥))[0-9]*/g)
 
