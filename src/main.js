@@ -13,7 +13,6 @@ const app = require('./app')
 // }
 
 // app.use(sslify)
-
 app.listen(APP_PORT, () => {
     console.log(`HTTPS Server is running on: https://localhost:${APP_PORT}`);
   });

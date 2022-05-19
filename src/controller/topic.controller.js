@@ -15,6 +15,7 @@ class TopicController {
         }
     }
     async getTopicByTitle(ctx,next){
+        console.log(1111111)
         const param = ctx.request.body
         const res = await getTopicByTitle(param)
         // 2.从数据库查询对应id的titile
